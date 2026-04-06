@@ -62,100 +62,64 @@ A production-like REST API for a full-featured blog platform built with **Expres
 
 ---
 
-## ⚙️ Setup & Installation
-
-### 1. Clone the repo
-```bash
-git clone https://github.com/YOUR_USERNAME/blog-app.git
-cd blog-app
-```
-
-### 2. Install dependencies
-```bash
-npm install
-```
-
-### 3. Configure environment variables
-```bash
-cp .env.example .env
-```
-
-Fill in your `.env`:
-```env
-PORT=3000
-MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/blog-app
-
-JWT_SECRET=your_super_secret_key
-JWT_EXPIRES_IN=7d
-
-IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
-IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
-IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_id
-```
-
-### 4. Run the server
-```bash
-# Development (with nodemon)
-npm run dev
-
-# Production
-npm start
-```
-
----
-
 ## 🌐 API Reference
 
 ### Auth
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/auth/register` | Register new user | ❌ |
-| POST | `/api/auth/login` | Login & get JWT | ❌ |
+
+| Method | Endpoint             | Description       | Auth |
+| ------ | -------------------- | ----------------- | ---- |
+| POST   | `/api/auth/register` | Register new user | ❌   |
+| POST   | `/api/auth/login`    | Login & get JWT   | ❌   |
 
 ### Users
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/users` | Get all users | admin / super-admin |
-| GET | `/api/users/:id` | Get user by ID | ✅ |
-| GET | `/api/users/:id/posts` | Get user's posts | ✅ |
-| PUT | `/api/users/:id` | Update user | ✅ (own or super-admin) |
-| DELETE | `/api/users/:id` | Delete user | ✅ (own or super-admin) |
+
+| Method | Endpoint               | Description      | Auth                    |
+| ------ | ---------------------- | ---------------- | ----------------------- |
+| GET    | `/api/users`           | Get all users    | admin / super-admin     |
+| GET    | `/api/users/:id`       | Get user by ID   | ✅                      |
+| GET    | `/api/users/:id/posts` | Get user's posts | ✅                      |
+| PUT    | `/api/users/:id`       | Update user      | ✅ (own or super-admin) |
+| DELETE | `/api/users/:id`       | Delete user      | ✅ (own or super-admin) |
 
 ### Posts
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/posts` | Get all accessible posts | ✅ |
-| POST | `/api/posts` | Create post (multipart/form-data) | ✅ |
-| GET | `/api/posts/:id` | Get single post | ✅ |
-| PUT | `/api/posts/:id` | Update post | ✅ (owner or super-admin) |
-| DELETE | `/api/posts/:id` | Delete post | ✅ (owner or super-admin) |
-| POST | `/api/posts/:id/like` | Toggle like | ✅ |
+
+| Method | Endpoint              | Description                       | Auth                      |
+| ------ | --------------------- | --------------------------------- | ------------------------- |
+| GET    | `/api/posts`          | Get all accessible posts          | ✅                        |
+| POST   | `/api/posts`          | Create post (multipart/form-data) | ✅                        |
+| GET    | `/api/posts/:id`      | Get single post                   | ✅                        |
+| PUT    | `/api/posts/:id`      | Update post                       | ✅ (owner or super-admin) |
+| DELETE | `/api/posts/:id`      | Delete post                       | ✅ (owner or super-admin) |
+| POST   | `/api/posts/:id/like` | Toggle like                       | ✅                        |
 
 #### Query Parameters for GET /api/posts
+
 - `page` (default: 1)
 - `limit` (default: 10)
 - `search` — full-text search in title & content
 
 ### Groups
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/groups` | Get all groups | ✅ |
-| POST | `/api/groups` | Create group | ✅ |
-| GET | `/api/groups/:id` | Get group by ID | ✅ |
-| PUT | `/api/groups/:id` | Update group | group admin |
-| DELETE | `/api/groups/:id` | Delete group | group admin |
-| POST | `/api/groups/:id/members` | Add member | group admin |
-| DELETE | `/api/groups/:id/members` | Remove member | group admin |
-| POST | `/api/groups/:id/admins` | Promote to admin | group admin |
-| PATCH | `/api/groups/:id/permissions` | Grant/revoke post permission | group admin |
+
+| Method | Endpoint                      | Description                  | Auth        |
+| ------ | ----------------------------- | ---------------------------- | ----------- |
+| GET    | `/api/groups`                 | Get all groups               | ✅          |
+| POST   | `/api/groups`                 | Create group                 | ✅          |
+| GET    | `/api/groups/:id`             | Get group by ID              | ✅          |
+| PUT    | `/api/groups/:id`             | Update group                 | group admin |
+| DELETE | `/api/groups/:id`             | Delete group                 | group admin |
+| POST   | `/api/groups/:id/members`     | Add member                   | group admin |
+| DELETE | `/api/groups/:id/members`     | Remove member                | group admin |
+| POST   | `/api/groups/:id/admins`      | Promote to admin             | group admin |
+| PATCH  | `/api/groups/:id/permissions` | Grant/revoke post permission | group admin |
 
 ### Comments (Bonus)
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/comments/post/:postId` | Get post's comments | ✅ |
-| POST | `/api/comments/post/:postId` | Add comment | ✅ |
-| PUT | `/api/comments/:id` | Update comment | ✅ (owner) |
-| DELETE | `/api/comments/:id` | Delete comment | ✅ (owner) |
+
+| Method | Endpoint                     | Description         | Auth       |
+| ------ | ---------------------------- | ------------------- | ---------- |
+| GET    | `/api/comments/post/:postId` | Get post's comments | ✅         |
+| POST   | `/api/comments/post/:postId` | Add comment         | ✅         |
+| PUT    | `/api/comments/:id`          | Update comment      | ✅ (owner) |
+| DELETE | `/api/comments/:id`          | Delete comment      | ✅ (owner) |
 
 ---
 
@@ -179,40 +143,23 @@ Fields:
 
 ## 🔐 Role System
 
-| Role | Capabilities |
-|------|-------------|
-| `user` | CRUD own posts, join groups, comment, like |
-| `admin` | All user capabilities + manage group members |
-| `super-admin` | Full system access — override all rules |
+| Role          | Capabilities                                 |
+| ------------- | -------------------------------------------- |
+| `user`        | CRUD own posts, join groups, comment, like   |
+| `admin`       | All user capabilities + manage group members |
+| `super-admin` | Full system access — override all rules      |
 
 ---
 
 ## 🛡️ Middleware Summary
 
-| Middleware | Purpose |
-|-----------|---------|
-| `protect` | Verifies JWT, attaches `req.user` |
-| `restrictTo(...roles)` | Blocks access by role |
-| `upload` | Multer — buffers images in memory |
-| `uploadOnImageKit` | Uploads buffers to ImageKit, sets `req.uploadedImages` |
-| `globalErrorHandler` | Catches all errors, formats response |
-
----
-
-## 🚢 Deployment to Vercel
-
-1. Push code to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project → Import repo
-3. Add all environment variables from `.env`
-4. Deploy — Vercel uses `vercel.json` to route all requests to `server.js`
-
----
-
-## 🧪 Testing with Postman
-
-1. Register → copy the `token` from response
-2. Add header: `Authorization: Bearer <token>` to all protected routes
-3. For post creation, use **Body → form-data** and attach image files to the `images` key
+| Middleware             | Purpose                                                |
+| ---------------------- | ------------------------------------------------------ |
+| `protect`              | Verifies JWT, attaches `req.user`                      |
+| `restrictTo(...roles)` | Blocks access by role                                  |
+| `upload`               | Multer — buffers images in memory                      |
+| `uploadOnImageKit`     | Uploads buffers to ImageKit, sets `req.uploadedImages` |
+| `globalErrorHandler`   | Catches all errors, formats response                   |
 
 ---
 
